@@ -11,35 +11,36 @@ export default function WeekTimeline() {
   const timelineRef = useRef(null);
   const scrollAnimationRef = useRef(null); // Ref to store the GSAP animation instance
 
-  useEffect(() => {
-    const element = timelineRef.current;
+  // useEffect(() => {
+  //   const element = timelineRef.current;
 
-    scrollAnimationRef.current = gsap.to(element, {
-      x: () => -(element.scrollWidth - element.offsetWidth),
-      ease: 'none',
-      scrollTrigger: {
-        trigger: element,
-        markers: true,
-        start: 'top top',
-        end: '+=2000px',
-        scrub: true,
-        pin: true,
-        pinSpacing: true,
-      },
-    });
+  //   scrollAnimationRef.current = gsap.to(element, {
+  //     x: () => -(element.scrollWidth - element.offsetWidth),
+  //     ease: 'none',
+  //     scrollTrigger: {
+  //       trigger: element,
+  //       start: 'top top',
+  //       end: '+=2000px',
+  //       scrub: true,
+  //       pin: true,
+  //       pinSpacing: true,
+  //     },
+  //   });
 
-    // Cleanup the timeline and ScrollTrigger on unmount
-    return () => {
-      scrollAnimationRef.current?.kill(); // Kill the animation instance
-      ScrollTrigger.getAll().forEach((trigger) => trigger.kill()); // Cleanup ScrollTriggers
-    };
-  }, []);
+  //   // Cleanup tween on unmount
+  //   return () => {
+  //     console.log('Unmounting WeekTimeline');
+  //     console.log(scrollAnimationRef.current);
+  //     scrollAnimationRef.current.revert(); // Kill the animation instance
+  //     console.log(scrollAnimationRef.current);
+  //   };
+  // }, []);
 
   const positions = ['items-center', 'items-end', 'items-start']; // Full class names for vertical alignment
 
   return (
     <div className="h-[700px] border flex py-24" ref={timelineRef}>
-      {Array.from({ length: 5 }).map((_, index) => (
+      {Array.from({ length: 9 }).map((_, index) => (
         <div
           key={index}
           className={`flex ${getVerticalPositionClass(
