@@ -1,7 +1,10 @@
 'use client';
-import { useRef, useEffect } from 'react';
+
+import { useRef } from 'react';
 import { gsap } from 'gsap';
+import { useGSAP } from '@gsap/react';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
 import Link from 'next/link';
 import WeekCard from './WeekCard';
 
@@ -9,32 +12,22 @@ gsap.registerPlugin(ScrollTrigger);
 
 export default function WeekTimeline() {
   const timelineRef = useRef(null);
-  const scrollAnimationRef = useRef(null); // Ref to store the GSAP animation instance
 
-  // useEffect(() => {
-  //   const element = timelineRef.current;
-
-  //   scrollAnimationRef.current = gsap.to(element, {
-  //     x: () => -(element.scrollWidth - element.offsetWidth),
-  //     ease: 'none',
-  //     scrollTrigger: {
-  //       trigger: element,
-  //       start: 'top top',
-  //       end: '+=2000px',
-  //       scrub: true,
-  //       pin: true,
-  //       pinSpacing: true,
-  //     },
-  //   });
-
-  //   // Cleanup tween on unmount
-  //   return () => {
-  //     console.log('Unmounting WeekTimeline');
-  //     console.log(scrollAnimationRef.current);
-  //     scrollAnimationRef.current.revert(); // Kill the animation instance
-  //     console.log(scrollAnimationRef.current);
-  //   };
-  // }, []);
+  useGSAP(() => {
+    gsap.to(timelineRef.current, {
+      x: () =>
+        -(timelineRef.current.scrollWidth - timelineRef.current.offsetWidth),
+      ease: 'none',
+      scrollTrigger: {
+        trigger: timelineRef.current,
+        start: 'top top',
+        end: '+=2000px',
+        scrub: true,
+        pin: true,
+        pinSpacing: true,
+      },
+    });
+  });
 
   const positions = ['items-center', 'items-end', 'items-start']; // Full class names for vertical alignment
 
