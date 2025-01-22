@@ -9,22 +9,30 @@ gsap.registerPlugin(ScrollTrigger);
 
 export default function WeekTimeline() {
   const timelineRef = useRef(null);
+  const scrollAnimationRef = useRef(null); // Ref to store the GSAP animation instance
 
   useEffect(() => {
     const element = timelineRef.current;
-    gsap.to(element, {
+
+    scrollAnimationRef.current = gsap.to(element, {
       x: () => -(element.scrollWidth - element.offsetWidth),
       ease: 'none',
       scrollTrigger: {
         trigger: element,
         markers: true,
-        start: 'top 0',
+        start: 'top top',
         end: '+=2000px',
         scrub: true,
         pin: true,
         pinSpacing: true,
       },
     });
+
+    // Cleanup the timeline and ScrollTrigger on unmount
+    return () => {
+      scrollAnimationRef.current?.kill(); // Kill the animation instance
+      ScrollTrigger.getAll().forEach((trigger) => trigger.kill()); // Cleanup ScrollTriggers
+    };
   }, []);
 
   const positions = ['items-center', 'items-end', 'items-start']; // Full class names for vertical alignment

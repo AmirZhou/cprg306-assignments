@@ -622,10 +622,6 @@ video {
   gap: 0.25rem;
 }
 
-.overflow-hidden {
-  overflow: hidden;
-}
-
 .border {
   border-width: 1px;
 }
