@@ -6,8 +6,6 @@ https://cprg306-assignments.bitravage.ca/
 
 ## Getting Started
 
-First, run the development server:
-
 ```bash
 npm run dev
 
@@ -17,24 +15,4 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 ## Project Title:
 
-CPRG Assignment
-
-## Description:
-
-...
-
-## Usage:
-
-...
-
-## Contributing:
-
-...
-
-## Credits:
-
-...
-
-## License:
-
-This project is open source and available under the [GPLv3 License](LICENSE).
+CPRG Assignments
