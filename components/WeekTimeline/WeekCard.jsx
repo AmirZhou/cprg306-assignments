@@ -178,11 +178,15 @@ export default function WeekCard({ imgUrl, weekNumber }) {
           ></div>
         ))}
       </div>
-      <div
-        className="cardInfo text-center mt-4 w-72 h-12 bg-[#E3DDDD] relative"
-        ref={textRef}
-      >
-        <h3 className="text-lg font-semibold">Week {weekNumber + 1}</h3>
+      <div className="cardShade flex flex-col justify-start mt-1 w-72 h-12 relative overflow-visible">
+        <div
+          className="cardInfo flex justify-start items-center w-full h-full bg-[#E3DDDD] "
+          ref={textRef}
+        >
+          <h3 className="pl-3 text-lg font-semibold text-slate-500">
+            WEEK {weekNumber + 1}
+          </h3>
+        </div>
         <svg
           className="absolute inset-0 w-full h-full pointer-events-none"
           viewBox="0 0 300 50" // Adjust viewBox as needed for scaling
