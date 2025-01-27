@@ -2,6 +2,7 @@
 
 import { useRef, useEffect } from 'react';
 import { gsap } from 'gsap';
+import { useGSAP } from '@gsap/react';
 
 export default function WeekCard({ imgUrl, weekNumber }) {
   const trianglesRef = useRef(Array(4).fill(null)); // Pre-initialize the array with 4 slots
@@ -13,9 +14,18 @@ export default function WeekCard({ imgUrl, weekNumber }) {
 
   const opacities = [0.15, 0.25, 0.35, 0.15]; // Define the initial opacities
 
-  // Create GSAP Timeline
-  // todo: the ease.power4.out should look pretty good for this. especially for the last several step for the triangles
-  // check the visualizer for the ease.power4.out https://gsap.com/docs/v3/Eases/?ref=6234
+  useGSAP(
+    () => {
+      // Set initial opacity values on mount
+      trianglesRef.current.forEach((triangle, index) => {
+        if (triangle) {
+          gsap.set(triangle, { opacity: opacities[index] });
+        }
+      });
+    },
+    { scope: cardRef }
+  );
+
   const createTimeline = () => {
     const tl = gsap.timeline({ paused: true });
 
@@ -86,6 +96,8 @@ export default function WeekCard({ imgUrl, weekNumber }) {
     return tl;
   };
 
+  const { contextSafe } = useGSAP();
+
   const createTextTimeline = () => {
     const tl = gsap.timeline({ paused: true });
 
@@ -98,10 +110,11 @@ export default function WeekCard({ imgUrl, weekNumber }) {
     return tl;
   };
 
-  const handleMouseEnter = () => {
+  const handleMouseEnter = contextSafe(() => {
     if (!timeline.current) {
       timeline.current = createTimeline();
     }
+
     if (!textTimeline.current) {
       textTimeline.current = createTextTimeline();
     }
@@ -110,9 +123,9 @@ export default function WeekCard({ imgUrl, weekNumber }) {
     textTimeline.current?.restart();
 
     gsap.to(cardRef.current, { filter: 'none', duration: 0.2 });
-  };
+  });
 
-  const handleMouseLeave = () => {
+  const handleMouseLeave = contextSafe(() => {
     // Reset triangles to their initial opacities
     trianglesRef.current.forEach((triangle, index) => {
       if (triangle) {
@@ -131,16 +144,7 @@ export default function WeekCard({ imgUrl, weekNumber }) {
       color: '#000000',
       duration: 0.2,
     });
-  };
-
-  useEffect(() => {
-    // Apply initial opacity values on mount
-    trianglesRef.current.forEach((triangle, index) => {
-      if (triangle) {
-        gsap.set(triangle, { opacity: opacities[index] });
-      }
-    });
-  }, []);
+  });
 
   return (
     <div className="flex flex-col gap-1">
