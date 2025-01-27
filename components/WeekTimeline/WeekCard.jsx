@@ -8,11 +8,11 @@ export default function WeekCard({ imgUrl, weekNumber }) {
   const trianglesRef = useRef(Array(4).fill(null)); // Pre-initialize the array with 4 slots
   const timeline = useRef(null);
   const textTimeline = useRef(null);
-
   const cardRef = useRef(null); // Ref for the card's background
   const textRef = useRef(null); // Ref for the text-center element
 
   const opacities = [0.15, 0.25, 0.35, 0.15]; // Define the initial opacities
+  const { contextSafe } = useGSAP();
 
   useGSAP(
     () => {
@@ -96,8 +96,6 @@ export default function WeekCard({ imgUrl, weekNumber }) {
     return tl;
   };
 
-  const { contextSafe } = useGSAP();
-
   const createTextTimeline = () => {
     const tl = gsap.timeline({ paused: true });
 
@@ -180,9 +178,44 @@ export default function WeekCard({ imgUrl, weekNumber }) {
           ></div>
         ))}
       </div>
-      <div className="text-center mt-4 w-72 h-12 bg-[#E3DDDD]" ref={textRef}>
+      <div
+        className="cardInfo text-center mt-4 w-72 h-12 bg-[#E3DDDD] relative"
+        ref={textRef}
+      >
         <h3 className="text-lg font-semibold">Week {weekNumber + 1}</h3>
-        {/* <p className="text-sm text-gray-500">Jan 1 - Jan 7</p> */}
+        <svg
+          className="absolute inset-0 w-full h-full pointer-events-none"
+          viewBox="0 0 300 50" // Adjust viewBox as needed for scaling
+        >
+          {/* Top-left corner */}
+          <path
+            d="M 0,0 H 16 M 0,0 V 16"
+            fill="none"
+            stroke="#000"
+            strokeWidth="3"
+          />
+          {/* Top-right corner */}
+          <path
+            d="M 284,0 H 300 M 300,0 v16"
+            fill="none"
+            stroke="#000"
+            strokeWidth="3"
+          />
+          {/* Bottom-left corner */}
+          <path
+            d="M 0,34 V 50 M 0,50 H 16"
+            fill="none"
+            stroke="#000"
+            strokeWidth="3"
+          />
+          {/* Bottom-right corner */}
+          <path
+            d="M 284,50 H 300 M 300,50 V 34"
+            fill="none"
+            stroke="#000"
+            strokeWidth="3"
+          />
+        </svg>
       </div>
     </div>
   );
