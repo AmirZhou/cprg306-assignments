@@ -9,7 +9,7 @@
  */
 export default function Item({ name, quantity, category }) {
   return (
-    <div className="w-72 p-4 rounded-md font-poppins text-slate-400  bg-slate-900 flex flex-col gap-2 hover:translate-x-1 transition-all duration-100">
+    <div className="w-72 p-4 rounded-md font-poppins text-slate-400 box-border bg-slate-900 flex flex-col gap-2 border border-transparent hover:bg-slate-800 hover:border-lime-500 transition-all duration-150">
       <h2 className="font-semibold capitalize">{name}</h2>
       <p>
         Buy{' '}
