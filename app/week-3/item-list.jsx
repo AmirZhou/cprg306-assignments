@@ -2,7 +2,7 @@ import Item from './item';
 
 export default function ItemList() {
   return (
-    <div className="flex flex-col gap-1">
+    <div className="flex flex-wrap gap-2">
       {items.map((item, index) => (
         <Item
           key={index}
