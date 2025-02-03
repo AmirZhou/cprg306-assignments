@@ -1,8 +1,5 @@
 import ItemList from './item-list';
 
-/**
- * Renders the week 3 page
- */
 export default function Page() {
   return (
     <div className='w-screen min-h-screen p-2 flex flex-col gap-4 bg-slate-700'>
