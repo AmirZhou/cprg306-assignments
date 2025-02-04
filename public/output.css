@@ -690,10 +690,6 @@ video {
   border-color: transparent;
 }
 
-.border-current {
-  border-color: currentColor;
-}
-
 .bg-\[\#E3DDDD\] {
   --tw-bg-opacity: 1;
   background-color: rgb(227 221 221 / var(--tw-bg-opacity, 1));
@@ -749,12 +745,12 @@ video {
   line-height: 1.75rem;
 }
 
-.font-semibold {
-  font-weight: 600;
-}
-
 .font-bold {
   font-weight: 700;
+}
+
+.font-semibold {
+  font-weight: 600;
 }
 
 .uppercase {
@@ -772,6 +768,11 @@ video {
 .text-blue-600 {
   --tw-text-opacity: 1;
   color: rgb(37 99 235 / var(--tw-text-opacity, 1));
+}
+
+.text-lime-500 {
+  --tw-text-opacity: 1;
+  color: rgb(132 204 22 / var(--tw-text-opacity, 1));
 }
 
 .text-slate-300 {
@@ -792,11 +793,6 @@ video {
 .text-slate-900 {
   --tw-text-opacity: 1;
   color: rgb(15 23 42 / var(--tw-text-opacity, 1));
-}
-
-.text-lime-500 {
-  --tw-text-opacity: 1;
-  color: rgb(132 204 22 / var(--tw-text-opacity, 1));
 }
 
 .text-stone-500 {
@@ -848,16 +844,12 @@ video {
   transition-duration: 150ms;
 }
 
-.duration-100 {
-  transition-duration: 100ms;
+.duration-150 {
+  transition-duration: 150ms;
 }
 
 .duration-200 {
   transition-duration: 200ms;
-}
-
-.duration-150 {
-  transition-duration: 150ms;
 }
 
 .ease-in-out {
@@ -883,33 +875,9 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
-.hover\:translate-x-1:hover {
-  --tw-translate-x: 0.25rem;
-  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
-}
-
-.hover\:border:hover {
-  border-width: 1px;
-}
-
-.hover\:border-slate-700:hover {
-  --tw-border-opacity: 1;
-  border-color: rgb(51 65 85 / var(--tw-border-opacity, 1));
-}
-
-.hover\:border-amber-700:hover {
-  --tw-border-opacity: 1;
-  border-color: rgb(180 83 9 / var(--tw-border-opacity, 1));
-}
-
 .hover\:border-lime-500:hover {
   --tw-border-opacity: 1;
   border-color: rgb(132 204 22 / var(--tw-border-opacity, 1));
-}
-
-.hover\:bg-slate-700:hover {
-  --tw-bg-opacity: 1;
-  background-color: rgb(51 65 85 / var(--tw-bg-opacity, 1));
 }
 
 .hover\:bg-slate-800:hover {
