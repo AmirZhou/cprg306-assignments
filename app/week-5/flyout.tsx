@@ -11,7 +11,7 @@ export default function Flyout({ isOpen, onClose, children }) {
       ></div>
 
       {/* panel */}
-      <div className="fixed right-0 top-0 flex h-full w-1/4 min-w-[350px] items-center justify-center bg-gray-50/40 p-8">
+      <div className="fixed right-0 top-0 flex h-full w-1/4 min-w-[350px] items-center justify-center bg-gray-50/40">
         {children}
       </div>
     </>
