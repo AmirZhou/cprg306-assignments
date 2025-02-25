@@ -1,4 +1,9 @@
-import { CrossIcon, MinusIcon, PlusIcon } from "@/components/Icons";
+import {
+  CrossIcon,
+  MinusIcon,
+  PlusIcon,
+  DropdownIcon,
+} from "@/components/Icons";
 import { useState } from "react";
 
 export default function AddItemForm() {
@@ -41,8 +46,10 @@ export default function AddItemForm() {
               <label className="text-gray-900" htmlFor="quantity">
                 Quantity
               </label>
+
+              {/* quantity */}
               <div className="flex w-full gap-3">
-                <div className="flex h-10 flex-1 items-center rounded-md border border-gray-400 focus-within:ring-1 focus-within:ring-gray-900">
+                <div className="flex h-10 flex-1 items-center justify-between rounded-md border border-gray-400 focus-within:ring-1 focus-within:ring-gray-900">
                   <input
                     className="h-full min-w-0 rounded-md border-none px-2 text-sm outline-none"
                     // style={{ width: 0 }} // i don't really like this inline style, but without this, the input field will be too wide , w-0 wouldn't work, so i used this, update: min-w-0 works
@@ -55,16 +62,23 @@ export default function AddItemForm() {
                     <PlusIcon />
                   </div>
                 </div>
-                <select
-                  className="h-10 min-w-0 flex-1 appearance-none rounded-md border border-gray-400 px-2 text-sm outline-none focus:ring-1 focus:ring-gray-900"
-                  // style={{ width: 0 }}
-                  id="category"
-                >
-                  {/* the following categories should not be hard coded */}
-                  <option value="1">Category 1</option>
-                  <option value="2">Category 2</option>
-                  <option value="3">Category 3</option>
-                </select>
+
+                {/* category */}
+                <div className="flex h-10 flex-1 items-center justify-between rounded-md border border-gray-400 focus-within:ring-1 focus-within:ring-gray-900">
+                  <select
+                    className="h-full min-w-0 appearance-none rounded-md border-none px-2 text-sm outline-none"
+                    // style={{ width: 0 }}
+                    id="category"
+                  >
+                    {/* the following categories should not be hard coded */}
+                    <option value="1">Category 1</option>
+                    <option value="2">Category 2</option>
+                    <option value="3">Category 3</option>
+                  </select>
+                  <div className="flex h-full items-center pr-2">
+                    <DropdownIcon />
+                  </div>
+                </div>
               </div>
             </div>
 
