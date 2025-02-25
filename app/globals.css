@@ -13,6 +13,22 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
+/* everyting in the @layer base is my custom preset */
+/* 1. customize input field */
+@layer base {
+  input[type="number"] {
+    -webkit-appearance: none;
+    -moz-appearance: textfield;
+    appearance: none;
+  }
+
+  input[type="number"]::-webkit-inner-spin-button,
+  input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+}
+
 @layer utilities {
   /* Main parallelogram container */
   .clip-parallelogram {

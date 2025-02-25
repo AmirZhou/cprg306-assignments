@@ -7,11 +7,11 @@ export default function Flyout({ isOpen, onClose, children }) {
     <>
       {/* overlay */}
       <div
-        className={`fixed inset-0 ${isOpen ? "bg-black/30 opacity-100" : "pointer-events-none opacity-0"}`}
+        className={`fixed inset-0 ${isOpen ? "bg-black/10 opacity-100" : "pointer-events-none opacity-0"}`}
       ></div>
 
       {/* panel */}
-      <div className="fixed right-0 top-0 flex h-full w-1/4 min-w-[350px] items-center justify-center bg-gray-50/40">
+      <div className="fixed right-0 top-0 flex h-full w-1/4 min-w-[350px] items-center justify-center bg-gray-50 shadow-xl">
         {children}
       </div>
     </>
