@@ -4,10 +4,76 @@ import {
   PlusIcon,
   DropdownIcon,
 } from "@/components/Icons";
-import { useState } from "react";
+import { useState, useRef } from "react";
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
 
 export default function AddItemForm() {
   const [quantity, setQuantity] = useState(1);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [selectedCategory, setSelectedCategory] = useState("Category 1");
+
+  // refs
+  const dropdownRef = useRef<HTMLDivElement>(null);
+  const dropdownIconRef = useRef<SVGSVGElement>(null);
+  const dropdownMenuRef = useRef<HTMLDivElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  const categories = ["Category 1", "Category 2", "Category 3"];
+
+  useGSAP(
+    () => {
+      // tween for dropdown icon
+      if (dropdownIconRef.current) {
+        gsap.to(dropdownIconRef.current, {
+          rotate: isDropdownOpen ? 180 : 0,
+          duraton: 0.2,
+          ease: "power2.out",
+        });
+      }
+
+      // tween for dropdown menu
+      if (dropdownMenuRef.current && isDropdownOpen) {
+        gsap.fromTo(
+          dropdownMenuRef.current,
+          { opacity: 0, y: -10 },
+          { opacity: 1, y: 0, duration: 0.2, ease: "power2.out" },
+        );
+      }
+    },
+    { scope: containerRef, dependencies: [isDropdownOpen] },
+  );
+
+  const { contextSafe } = useGSAP({ scope: containerRef }); // why wouldn't i return this from the previous hook call?
+
+  const toggleDropdown = contextSafe(() => {
+    setIsDropdownOpen(!isDropdownOpen);
+  });
+
+  const selectCategory = contextSafe((category: string) => {
+    setSelectedCategory(category);
+    setIsDropdownOpen(false);
+  });
+
+  // handle click outside with contestSafe
+  useGSAP(
+    () => {
+      const handleClickOutside = (e: MouseEvent) => {
+        if (
+          dropdownRef.current &&
+          !dropdownRef.current.contains(e.target as Node)
+        ) {
+          setIsDropdownOpen(false);
+        }
+      };
+      document.addEventListener("mousedown", handleClickOutside);
+
+      return () => {
+        document.removeEventListener("mousedown", handleClickOutside);
+      };
+    },
+    { scope: containerRef },
+  );
 
   const handleIncrement = () => {
     setQuantity((prev) => prev + 1);
@@ -79,20 +145,44 @@ export default function AddItemForm() {
                   </div>
                 </div>
 
-                {/* category */}
-                <div className="flex h-10 flex-1 items-center justify-between rounded-md border border-gray-400 focus-within:ring-1 focus-within:ring-gray-900">
-                  <select
-                    className="h-full w-full flex-1 appearance-none rounded-md border-none px-2 text-sm outline-none"
-                    id="category"
-                  >
-                    {/* the following categories should not be hard coded */}
-                    <option value="1">Category 1</option>
-                    <option value="2">Category 2</option>
-                    <option value="3">Category 3</option>
-                  </select>
-                  <div className="flex h-full items-center pr-2">
-                    <DropdownIcon className="hover:stroke-violet-800" />
+                {/* category with custom dropdown*/}
+                <div
+                  ref={dropdownRef}
+                  className="relative flex h-10 flex-1 items-center justify-between rounded-md border border-gray-400 focus-within:ring-1 focus-within:ring-gray-900"
+                >
+                  <div className="flex h-10 flex-1 items-center justify-between rounded-md border border-gray-400 focus-within:ring-1 focus-within:ring-gray-900">
+                    <div
+                      className="flex h-full w-full cursor-pointer items-center justify-between px-2"
+                      onClick={toggleDropdown}
+                    >
+                      <span className="text-sm">{selectedCategory}</span>
+                      <div className="flex h-full items-center pr-2">
+                        <DropdownIcon
+                          ref={dropdownIconRef}
+                          className="hover:stroke-violet-800"
+                          onClick={toggleDropdown}
+                        />
+                      </div>
+                    </div>
                   </div>
+
+                  {/* dropdown menu */}
+                  {isDropdownOpen && (
+                    <div
+                      ref={dropdownMenuRef}
+                      className="absolute left-0 right-0 top-full z-10 mt-1 rounded-md border border-gray-400 bg-white shadow-lg"
+                    >
+                      {categories.map((category) => (
+                        <div
+                          key={category}
+                          className="cursor-pointer px-2 py-2 text-sm hover:bg-violet-200"
+                          onClick={() => selectCategory(category)}
+                        >
+                          {category}
+                        </div>
+                      ))}
+                    </div>
+                  )}
                 </div>
               </div>
             </div>
