@@ -9,9 +9,10 @@ import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 
 export default function AddItemForm() {
+  const [itemName, setItemName] = useState("");
   const [quantity, setQuantity] = useState(1);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const [selectedCategory, setSelectedCategory] = useState("Category 1");
+  const [selectedCategory, setSelectedCategory] = useState("Produce");
 
   // refs
   const dropdownRef = useRef<HTMLDivElement>(null);
@@ -19,7 +20,19 @@ export default function AddItemForm() {
   const dropdownMenuRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
 
-  const categories = ["Category 1", "Category 2", "Category 3"];
+  const categories = [
+    "Produce",
+    "Dairy",
+    "Bakery",
+    "Meat",
+    "Frozen Foods",
+    "Canned Goods",
+    "Dry Goods",
+    "Beverages",
+    "Snacks",
+    "Household",
+    "Other",
+  ];
 
   useGSAP(
     () => {
@@ -75,6 +88,25 @@ export default function AddItemForm() {
     { scope: containerRef },
   );
 
+  const handleAddItem = () => {
+    if (!itemName.trim()) {
+      alert("Please enter an item name");
+      return;
+    }
+
+    const newItem = {
+      name: itemName,
+      quantity: quantity,
+      category: selectedCategory,
+    };
+
+    alert(`Added ${quantity} ${itemName} to ${selectedCategory}`);
+
+    setItemName("");
+    setQuantity(1);
+    setSelectedCategory("Produce");
+  };
+
   const handleIncrement = () => {
     setQuantity((prev) => prev + 1);
   };
@@ -114,6 +146,8 @@ export default function AddItemForm() {
                 className="h-16 rounded-md border border-gray-400 px-2 text-center text-3xl font-medium outline-none focus:ring-1 focus:ring-gray-900"
                 type="text"
                 id="name"
+                value={itemName}
+                onChange={(e) => setItemName(e.target.value)}
               />
             </div>
 
@@ -172,10 +206,10 @@ export default function AddItemForm() {
                       ref={dropdownMenuRef}
                       className="absolute left-0 right-0 top-full z-10 mt-1 rounded-md border border-gray-400 bg-white shadow-lg"
                     >
-                      {categories.map((category) => (
+                      {categories.map((category, index) => (
                         <div
                           key={category}
-                          className="cursor-pointer px-2 py-2 text-sm hover:bg-violet-200"
+                          className={`cursor-pointer px-2 py-2 text-sm hover:bg-violet-200 ${index === 0 ? "rounded-t-md" : ""} ${index === categories.length - 1 ? "rounded-b-md" : ""}`}
                           onClick={() => selectCategory(category)}
                         >
                           {category}
@@ -188,7 +222,10 @@ export default function AddItemForm() {
             </div>
 
             {/* the button */}
-            <button className="h-10 w-24 self-end rounded-full bg-gray-900 font-poppins text-gray-200 hover:bg-gray-800">
+            <button
+              className="h-10 w-24 self-end rounded-full bg-gray-900 font-poppins text-gray-200 hover:bg-gray-800"
+              onClick={handleAddItem}
+            >
               Add
             </button>
           </div>
