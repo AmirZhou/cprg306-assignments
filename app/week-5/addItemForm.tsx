@@ -17,6 +17,16 @@ export default function AddItemForm() {
     setQuantity((prev) => Math.max(1, prev - 1));
   };
 
+  const handleQuantityChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+
+    if (value === "") {
+      setQuantity("" as unknown as number); // what does this magic do?
+    } else if (!isNaN(Number(value)) && Number(value) >= 1) {
+      setQuantity(Number(value)); // where this Number function
+    }
+  };
+
   return (
     <>
       <div className="h-full w-full px-8 py-10">
@@ -51,23 +61,28 @@ export default function AddItemForm() {
               <div className="flex w-full gap-3">
                 <div className="flex h-10 flex-1 items-center justify-between rounded-md border border-gray-400 focus-within:ring-1 focus-within:ring-gray-900">
                   <input
-                    className="h-full min-w-0 rounded-md border-none px-2 text-sm outline-none"
-                    // style={{ width: 0 }} // i don't really like this inline style, but without this, the input field will be too wide , w-0 wouldn't work, so i used this, update: min-w-0 works
-                    // update: After adding the buttons, this no longer works. I will have to find a better way to do this, may be becausue the buttons got a default width i cant get rid of, and the input field as a result growth faster.
+                    className="h-full w-full flex-1 rounded-md border-none px-2 text-sm outline-none"
+                    value={quantity}
+                    onChange={handleQuantityChange}
                     type="number"
                     id="quantity"
                   />
                   <div className="flex h-full items-center pr-2">
-                    <MinusIcon />
-                    <PlusIcon />
+                    <MinusIcon
+                      onClick={handleDecrement}
+                      className="transition-transform duration-200 hover:stroke-violet-800 active:scale-95"
+                    />
+                    <PlusIcon
+                      onClick={handleIncrement}
+                      className="transition-transform duration-200 hover:stroke-violet-800 active:scale-95"
+                    />
                   </div>
                 </div>
 
                 {/* category */}
                 <div className="flex h-10 flex-1 items-center justify-between rounded-md border border-gray-400 focus-within:ring-1 focus-within:ring-gray-900">
                   <select
-                    className="h-full min-w-0 appearance-none rounded-md border-none px-2 text-sm outline-none"
-                    // style={{ width: 0 }}
+                    className="h-full w-full flex-1 appearance-none rounded-md border-none px-2 text-sm outline-none"
                     id="category"
                   >
                     {/* the following categories should not be hard coded */}
@@ -76,14 +91,14 @@ export default function AddItemForm() {
                     <option value="3">Category 3</option>
                   </select>
                   <div className="flex h-full items-center pr-2">
-                    <DropdownIcon />
+                    <DropdownIcon className="hover:stroke-violet-800" />
                   </div>
                 </div>
               </div>
             </div>
 
             {/* the button */}
-            <button className="h-10 w-24 self-end rounded-full bg-gray-900 font-poppins text-gray-200">
+            <button className="h-10 w-24 self-end rounded-full bg-gray-900 font-poppins text-gray-200 hover:bg-gray-800">
               Add
             </button>
           </div>
