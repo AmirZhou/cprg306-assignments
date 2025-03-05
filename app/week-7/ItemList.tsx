@@ -4,9 +4,11 @@ import TableHeader from "./TableHeader";
 import { useState } from "react";
 import CategoryList from "./CategoryList";
 
-interface ItemListProps extends React.ComponentProps<"div"> {}
+interface ItemListProps extends React.ComponentProps<"div"> {
+  onAddItem: (isDisplayAddingForm: boolean) => void;
+}
 
-export default function ItemList() {
+export default function ItemList({ onAddItem, ...props }: ItemListProps) {
   const [items, setItems] = useState(data);
   const [isCategoryView, setIsCategoryView] = useState(false);
   const [sortBy, setSortBy] = useState<"name" | "category" | "">("");
@@ -41,7 +43,10 @@ export default function ItemList() {
     <div className="flex h-full w-3/4 min-w-96 flex-col items-center justify-center gap-2">
       <div className="mb-4 flex w-full justify-between">
         <h2 className="text-4xl">Shopping List</h2>
-        <button className="w-24 rounded-md border bg-gray-500 font-semibold hover:bg-gray-600 hover:text-white">
+        <button
+          className="w-24 rounded-md border bg-gray-500 font-semibold hover:bg-gray-600 hover:text-white"
+          onClick={() => onAddItem(true)}
+        >
           Add
         </button>
       </div>

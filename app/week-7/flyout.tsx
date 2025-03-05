@@ -1,4 +1,4 @@
-export default function Flyout({ isOpen, onClose, children }) {
+export default function Flyout({ isOpen, children }) {
   // add a transparent div that covers the whole screen
   // and a div that contains the children
   // can use animation for the panel, while the overlay is static

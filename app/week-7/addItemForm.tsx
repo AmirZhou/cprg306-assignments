@@ -8,7 +8,7 @@ import { useState, useRef } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 
-export default function AddItemForm() {
+export default function AddItemForm({ onClose }) {
   const [itemName, setItemName] = useState("");
   const [quantity, setQuantity] = useState(1);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -105,6 +105,7 @@ export default function AddItemForm() {
     setItemName("");
     setQuantity(1);
     setSelectedCategory("Produce");
+    onClose();
   };
 
   const handleIncrement = () => {
@@ -132,7 +133,7 @@ export default function AddItemForm() {
           {/* title */}
           <div className="flex justify-between">
             <h2 className="text-xl font-semibold">Add Item</h2>
-            <CrossIcon />
+            <CrossIcon onClick={onClose} />
           </div>
 
           <div className="flex flex-col gap-6">
