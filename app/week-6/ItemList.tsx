@@ -2,6 +2,7 @@ import data from "./items.json";
 import Item from "./Item";
 import TableHeader from "./TableHeader";
 import { useState } from "react";
+import CategoryList from "./CategoryList";
 
 interface ItemListProps extends React.ComponentProps<"div"> {}
 
@@ -11,6 +12,7 @@ export default function ItemList() {
   const [sortBy, setSortBy] = useState<"name" | "category" | "">("");
   const [isAcsending, setIsAcsending] = useState(true);
 
+  // ai generated code
   const handleSort = (sortType: "name" | "category" | "") => {
     setSortBy((prevSortBy) => {
       return sortType;
@@ -29,24 +31,31 @@ export default function ItemList() {
       return newIsAscending;
     });
   };
+  // ai generated code ends
+
+  const handleToggleView = () => {
+    setIsCategoryView((prevIsCategoryView) => !prevIsCategoryView);
+  };
 
   return (
     <div className="flex h-full w-3/4 min-w-96 flex-col items-center justify-center gap-2">
-      <div className="flex w-full justify-between">
+      <div className="mb-4 flex w-full justify-between">
         <h2 className="text-4xl">Shopping List</h2>
-        <span>Add</span>
+        <button className="w-24 rounded-md border bg-gray-500 font-semibold hover:bg-gray-600 hover:text-white">
+          Add
+        </button>
       </div>
-      <div className="flex w-full justify-start gap-4">
-        <span className="rounded-l border bg-lime-700 px-2 py-1">
-          Normal View
-        </span>
-        <span className="rounded-l border bg-lime-700 px-2 py-1">
-          Category View
-        </span>
+      <div className="flex w-full justify-start gap-4 text-white">
+        <button
+          onClick={handleToggleView}
+          className={`rounded-md border px-2 py-1 text-sm ${isCategoryView ? "bg-lime-700 hover:bg-lime-800" : "bg-gray-500 hover:bg-gray-600"} `}
+        >
+          Grouped Category
+        </button>
       </div>
 
-      {!isCategoryView && (
-        <div className="w-full rounded-lg border border-gray-400 bg-gray-300 p-4">
+      {!isCategoryView ? (
+        <div className="w-full rounded-lg border border-gray-400 bg-gray-300 p-4 shadow-md">
           <TableHeader
             sortBy={sortBy}
             isAscending={isAcsending}
@@ -60,6 +69,8 @@ export default function ItemList() {
             />
           ))}
         </div>
+      ) : (
+        <CategoryList items={items} />
       )}
     </div>
   );

@@ -9,9 +9,9 @@ interface ItemProps extends React.ComponentProps<"div"> {
 export default function Item({ ...props }: ItemProps) {
   return (
     <div className={`flex w-full px-2 py-1 ${props.bgColor}`}>
-      <div className="w-1/3">{props.name}</div>
-      <div className="w-1/3">{props.category.toUpperCase()}</div>
-      <div className="w-1/3 text-purple-800">{props.quantity}</div>
+      <div className="flex-1">{props.name}</div>
+      <div className="flex-1">{props.category.toUpperCase()}</div>
+      <div className="flex-1 text-purple-800">{props.quantity}</div>
     </div>
   );
 }

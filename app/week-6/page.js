@@ -9,7 +9,7 @@ export default function Page() {
   const [isOpen, setIsOpen] = useState(false); // control the state of the flyout
 
   return (
-    <div className={`w-screen min-h-screen flex items-center justify-center bg-slate-50`}>
+    <div className={`w-screen min-h-screen flex items-start pt-20 justify-center bg-slate-50 font-poppins`}>
       <ItemList />
       {isOpen &&
         <Flyout isOpen={isOpen} onClose={() => { setIsOpen(false) }}>
