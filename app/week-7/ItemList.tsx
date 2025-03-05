@@ -1,4 +1,3 @@
-import data from "./items.json";
 import Item from "./Item";
 import TableHeader from "./TableHeader";
 import { useState } from "react";
@@ -6,10 +5,18 @@ import CategoryList from "./CategoryList";
 
 interface ItemListProps extends React.ComponentProps<"div"> {
   onAddItem: (isDisplayAddingForm: boolean) => void;
+  onSetItems: (
+    items: { id: string; name: string; quantity: number; category: string }[],
+  ) => void;
+  items: { id: string; name: string; quantity: number; category: string }[];
 }
 
-export default function ItemList({ onAddItem, ...props }: ItemListProps) {
-  const [items, setItems] = useState(data);
+export default function ItemList({
+  onAddItem,
+  onSetItems,
+  items,
+  ...props
+}: ItemListProps) {
   const [isCategoryView, setIsCategoryView] = useState(false);
   const [sortBy, setSortBy] = useState<"name" | "category" | "">("");
   const [isAcsending, setIsAcsending] = useState(true);
@@ -23,13 +30,13 @@ export default function ItemList({ onAddItem, ...props }: ItemListProps) {
     setIsAcsending((prevIsAscending) => {
       const newIsAscending = sortType === sortBy ? !prevIsAscending : true;
 
-      const sortedItems = [...items].sort((a, b) =>
+      const sortedItems = items.sort((a, b) =>
         newIsAscending
           ? a[sortType].localeCompare(b[sortType])
           : b[sortType].localeCompare(a[sortType]),
       );
 
-      setItems(sortedItems);
+      onSetItems(sortedItems);
       return newIsAscending;
     });
   };
