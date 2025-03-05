@@ -8,6 +8,27 @@ interface ItemListProps extends React.ComponentProps<"div"> {}
 export default function ItemList() {
   const [items, setItems] = useState(data);
   const [isCategoryView, setIsCategoryView] = useState(false);
+  const [sortBy, setSortBy] = useState<"name" | "category" | "">("");
+  const [isAcsending, setIsAcsending] = useState(true);
+
+  const handleSort = (sortType: "name" | "category" | "") => {
+    setSortBy((prevSortBy) => {
+      return sortType;
+    });
+
+    setIsAcsending((prevIsAscending) => {
+      const newIsAscending = sortType === sortBy ? !prevIsAscending : true;
+
+      const sortedItems = [...items].sort((a, b) =>
+        newIsAscending
+          ? a[sortType].localeCompare(b[sortType])
+          : b[sortType].localeCompare(a[sortType]),
+      );
+
+      setItems(sortedItems);
+      return newIsAscending;
+    });
+  };
 
   return (
     <div className="flex h-full w-3/4 min-w-96 flex-col items-center justify-center gap-2">
@@ -26,7 +47,11 @@ export default function ItemList() {
 
       {!isCategoryView && (
         <div className="w-full rounded-lg border border-gray-400 bg-gray-300 p-4">
-          <TableHeader />
+          <TableHeader
+            sortBy={sortBy}
+            isAscending={isAcsending}
+            onSort={handleSort}
+          />
           {items.map((item, i) => (
             <Item
               key={item.id}

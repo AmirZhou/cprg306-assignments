@@ -10,7 +10,7 @@ export default function Page() {
 
   return (
     <div className={`w-screen min-h-screen flex items-center justify-center bg-slate-50`}>
-      <ItemList></ItemList>
+      <ItemList />
       {isOpen &&
         <Flyout isOpen={isOpen} onClose={() => { setIsOpen(false) }}>
           <AddItemForm />
