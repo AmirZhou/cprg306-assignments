@@ -8,7 +8,7 @@ import { useState, useRef } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 
-export default function AddItemForm({ onClose }) {
+export default function AddItemForm({ onClose, onSubmit }) {
   const [itemName, setItemName] = useState("");
   const [quantity, setQuantity] = useState(1);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -100,7 +100,7 @@ export default function AddItemForm({ onClose }) {
       category: selectedCategory,
     };
 
-    alert(`Added ${quantity} ${itemName} to ${selectedCategory}`);
+    onSubmit(newItem);
 
     setItemName("");
     setQuantity(1);
