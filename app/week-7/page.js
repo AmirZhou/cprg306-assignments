@@ -28,7 +28,7 @@ export default function Page() {
   };
 
   return (
-    <div className={`w-screen min-h-screen flex items-start pt-20 justify-center bg-slate-50 font-poppins`}>
+    <div className={`w-full min-h-screen flex items-start pt-20 justify-center bg-slate-50 font-poppins`}>
       <ItemList items={items} onAddItem={handleAddItem} onSetItems={handleSetItems} />
       {isOpen &&
         <Flyout isOpen={isOpen} >
