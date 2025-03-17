@@ -6,6 +6,7 @@ import Flyout from "./flyout";
 import ItemList from "./ItemList";
 import { useState } from "react";
 import randomId from '@/utils/randomId';
+import { IngredientProvider, useIngredient } from './context/ingredientContext';
 
 export default function Page() {
   const [isOpen, setIsOpen] = useState(false); // control the state of the flyout
@@ -28,13 +29,15 @@ export default function Page() {
   };
 
   return (
-    <div className={`w-full min-h-screen flex items-start pt-20 justify-center bg-slate-50 font-poppins`}>
-      <ItemList items={items} onAddItem={handleAddItem} onSetItems={handleSetItems} />
-      {isOpen &&
-        <Flyout isOpen={isOpen} >
-          <AddItemForm onClose={() => { setIsOpen(false) }} onSubmit={(item) => handleSubmit(item)} />
-        </Flyout>
-      }
-    </div>
+    <IngredientProvider>
+      <div className={`w-full min-h-screen flex items-start pt-20 justify-center bg-slate-50 font-poppins`}>
+        <ItemList items={items} onAddItem={handleAddItem} onSetItems={handleSetItems} />
+        {isOpen &&
+          <Flyout isOpen={isOpen} >
+            <AddItemForm onClose={() => { setIsOpen(false) }} onSubmit={(item) => handleSubmit(item)} />
+          </Flyout>
+        }
+      </div>
+    </IngredientProvider>
   )
 }
