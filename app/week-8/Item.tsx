@@ -9,6 +9,7 @@ interface ItemProps extends React.ComponentProps<"div"> {
 export default function Item({ ...props }: ItemProps) {
   return (
     <div
+      onClick={props.onClick}
       className={`flex w-full px-2 py-1 ${props.bgColor} cursor-pointer hover:bg-gray-700 hover:text-white`}
     >
       <div className="flex-1">{props.name}</div>
