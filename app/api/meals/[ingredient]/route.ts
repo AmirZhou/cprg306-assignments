@@ -1,8 +1,9 @@
 export async function GET(
   request: Request,
-  { params }: { params: { ingredient: string } },
+  { params }: { params: Promise<{ ingredient: string }> },
 ) {
-  const { ingredient } = params;
+  const resolvedParams = await params;
+  const { ingredient } = resolvedParams;
 
   if (!ingredient) {
     return new Response(JSON.stringify({ error: "Ingredient is required" }), {
