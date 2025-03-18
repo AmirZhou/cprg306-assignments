@@ -7,7 +7,7 @@ import ItemList from "./ItemList";
 import MealsMenu from "./mealsMenu";
 import { useState } from "react";
 import randomId from '@/utils/randomId';
-import { IngredientProvider } from "@/app/week-8/context/ingredientContext";
+import { IngredientProvider } from "@/app/week-8/ingredientContext";
 
 export default function Page() {
   const [isOpen, setIsOpen] = useState(false); // control the state of the flyout

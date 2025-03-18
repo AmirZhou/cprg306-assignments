@@ -2,7 +2,7 @@ import Item from "./Item";
 import TableHeader from "./TableHeader";
 import { useState } from "react";
 import CategoryList from "./CategoryList";
-import { useIngredient } from "@/app/week-8/context/ingredientContext";
+import { useIngredient } from "@/app/week-8/ingredientContext";
 
 interface ItemListProps extends React.ComponentProps<"div"> {
   onAddItem: (isDisplayAddingForm: boolean) => void;
