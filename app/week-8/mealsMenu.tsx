@@ -1,5 +1,5 @@
 import { CrossIcon } from "@/components/Icons";
-import { useIngredient } from "./context/ingredientContext";
+import { useIngredient } from "@/app/week-8/context/ingredientContext";
 import { useEffect, useState } from "react";
 
 export default function MealsMenu({ onClose }) {
