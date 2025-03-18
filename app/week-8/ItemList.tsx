@@ -2,24 +2,33 @@ import Item from "./Item";
 import TableHeader from "./TableHeader";
 import { useState } from "react";
 import CategoryList from "./CategoryList";
+import { useIngredient } from "@/app/week-8/ingredientContext";
 
 interface ItemListProps extends React.ComponentProps<"div"> {
   onAddItem: (isDisplayAddingForm: boolean) => void;
   onSetItems: (
     items: { id: string; name: string; quantity: number; category: string }[],
   ) => void;
+  onSelectItem;
   items: { id: string; name: string; quantity: number; category: string }[];
 }
+
+const cleanItemName = (itemName: string): string => {
+  const namePart = itemName.split(",")[0].trim();
+  return namePart.replace(/[\p{Emoji_Presentation}|\p{Emoji}]/gu, "");
+};
 
 export default function ItemList({
   onAddItem,
   onSetItems,
+  onSelectItem,
   items,
   ...props
 }: ItemListProps) {
   const [isCategoryView, setIsCategoryView] = useState(false);
   const [sortBy, setSortBy] = useState<"name" | "category" | "">("");
   const [isAcsending, setIsAcsending] = useState(true);
+  const { ingredient, setIngredient } = useIngredient();
 
   // ai generated code
   const handleSort = (sortType: "name" | "category" | "") => {
@@ -40,10 +49,17 @@ export default function ItemList({
       return newIsAscending;
     });
   };
+
   // ai generated code ends
 
   const handleToggleView = () => {
     setIsCategoryView((prevIsCategoryView) => !prevIsCategoryView);
+  };
+
+  const handleItemClick = (itemName: string) => {
+    const cleanedName = cleanItemName(itemName);
+    setIngredient(cleanedName); // Set the selected ingredient in context
+    onSelectItem(); // Trigger the onSelectItem callback to open the menu
   };
 
   return (
@@ -75,6 +91,7 @@ export default function ItemList({
           />
           {items.map((item, i) => (
             <Item
+              onClick={() => handleItemClick(item.name)}
               key={item.id}
               {...item}
               bgColor={i % 2 === 0 ? "bg-gray-300" : "bg-gray-200"}
