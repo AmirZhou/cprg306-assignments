@@ -2,7 +2,6 @@
   "compilerOptions": {
     "target": "ES2017",
     // the next two entries are from the jsconfig.json(deleted) file which has been deleted since the project has migrate to TypeScript
-    "baseUrl": ".",
     "paths": {
       "@/*": ["./*"]
     },
