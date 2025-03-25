@@ -1,0 +1,1 @@
+import { signOutAction } from "@/app/(auth-pages)/actions";
