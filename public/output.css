@@ -666,6 +666,14 @@ input[type="number"]::-webkit-inner-spin-button,
   top: 100%;
 }
 
+.left-4 {
+  left: 1rem;
+}
+
+.top-4 {
+  top: 1rem;
+}
+
 .z-10 {
   z-index: 10;
 }
@@ -815,6 +823,14 @@ input[type="number"]::-webkit-inner-spin-button,
   width: 100vw;
 }
 
+.w-2\/3 {
+  width: 66.666667%;
+}
+
+.w-20 {
+  width: 5rem;
+}
+
 .min-w-64 {
   min-width: 16rem;
 }
@@ -919,6 +935,10 @@ input[type="number"]::-webkit-inner-spin-button,
   gap: 1.5rem;
 }
 
+.gap-8 {
+  gap: 2rem;
+}
+
 .self-end {
   align-self: flex-end;
 }
@@ -965,6 +985,14 @@ input[type="number"]::-webkit-inner-spin-button,
   border-left-width: 2px;
 }
 
+.border-r {
+  border-right-width: 1px;
+}
+
+.border-l {
+  border-left-width: 1px;
+}
+
 .border-none {
   border-style: none;
 }
@@ -993,6 +1021,16 @@ input[type="number"]::-webkit-inner-spin-button,
 
 .border-transparent {
   border-color: transparent;
+}
+
+.border-gray-200 {
+  --tw-border-opacity: 1;
+  border-color: rgb(229 231 235 / var(--tw-border-opacity, 1));
+}
+
+.border-gray-700 {
+  --tw-border-opacity: 1;
+  border-color: rgb(55 65 81 / var(--tw-border-opacity, 1));
 }
 
 .bg-\[\#E3DDDD\] {
@@ -1078,6 +1116,11 @@ input[type="number"]::-webkit-inner-spin-button,
 .bg-slate-400 {
   --tw-bg-opacity: 1;
   background-color: rgb(148 163 184 / var(--tw-bg-opacity, 1));
+}
+
+.bg-gray-700 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(55 65 81 / var(--tw-bg-opacity, 1));
 }
 
 .stroke-current {
@@ -1646,8 +1689,46 @@ input[type="number"]::-webkit-inner-spin-button,
 }
 
 @media (min-width: 768px) {
+  .md\:w-32 {
+    width: 8rem;
+  }
+
   .md\:grid-cols-3 {
     grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1024px) {
+  .lg\:w-96 {
+    width: 24rem;
+  }
+
+  .lg\:w-\[\] {
+    width: ;
+  }
+
+  .lg\:w-\[500px\] {
+    width: 500px;
+  }
+
+  .lg\:w-\[600px\] {
+    width: 600px;
+  }
+
+  .lg\:w-\[5px\] {
+    width: 5px;
+  }
+
+  .lg\:w-\[586px\] {
+    width: 586px;
+  }
+
+  .lg\:w-\[576\] {
+    width: 576;
+  }
+
+  .lg\:w-\[576px\] {
+    width: 576px;
   }
 }
 
