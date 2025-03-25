@@ -62,9 +62,6 @@
 /* everyting in the @layer base is my custom preset */
 /* 1. customize input field */
 @layer base {
-  * {
-    @apply border-border;
-  }
   body {
     @apply bg-background text-foreground;
   }
