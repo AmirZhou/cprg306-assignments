@@ -10,7 +10,7 @@ export default async function Page() {
   }
 
   return (
-    <div className="flex min-h-screen w-full items-start justify-center bg-slate-50 pt-20 font-poppins">
+    <div className="flex w-full flex-col gap-2">
       <h1 className="text-4xl">Week 9</h1>
       <p className="text-green-800">Only logged in users can see this.</p>
     </div>
