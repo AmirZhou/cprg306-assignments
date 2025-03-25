@@ -63,28 +63,23 @@ export const signOutAction = async () => {
   return redirect("/week-9");
 };
 
-export const signInWithProvider = async (
-  provider: Provider,
-  redirectTo?: string,
-) => {
+export const signInWithGitHubAction = async (formData: FormData) => {
   const supabase = await createClient();
   const origin = process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000";
 
   const { data, error } = await supabase.auth.signInWithOAuth({
-    provider: provider,
+    provider: "github",
     options: {
-      redirectTo: `${origin}/auth/callback?redirect_to=${encodeURIComponent(redirectTo || "/week-9")}`,
+      redirectTo: `${origin}/auth/callback?redirect_to=/week-9`,
     },
   });
 
   if (error) {
-    console.error(error);
+    console.error("GitHub sign-in error:", error);
     return encodedRedirect("error", "/sign-in", error.message);
   }
 
   if (data.url) {
     redirect(data.url);
   }
-
-  return { error: "Failed to initiate sign-in" };
 };
