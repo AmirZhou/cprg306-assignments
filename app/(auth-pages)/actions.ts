@@ -2,6 +2,7 @@
 
 import { encodedRedirect } from "@/utils/encodedRedirect";
 import { createClient } from "@/utils/supabase/server";
+import { Provider } from "@supabase/supabase-js";
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 
@@ -53,11 +54,37 @@ export const signInAction = async (formData: FormData) => {
     return encodedRedirect("error", "/sign-in", error.message);
   }
 
-  return redirect("/week-9/secure");
+  return redirect("/week-9");
 };
 
 export const signOutAction = async () => {
   const supabase = await createClient();
   await supabase.auth.signOut();
   return redirect("/week-9");
+};
+
+export const signInWithProvider = async (
+  provider: Provider,
+  redirectTo?: string,
+) => {
+  const supabase = await createClient();
+  const origin = process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000";
+
+  const { data, error } = await supabase.auth.signInWithOAuth({
+    provider: provider,
+    options: {
+      redirectTo: `${origin}/auth/callback?redirect_to=${encodeURIComponent(redirectTo || "/week-9")}`,
+    },
+  });
+
+  if (error) {
+    console.error(error);
+    return encodedRedirect("error", "/sign-in", error.message);
+  }
+
+  if (data.url) {
+    redirect(data.url);
+  }
+
+  return { error: "Failed to initiate sign-in" };
 };
