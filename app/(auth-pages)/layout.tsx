@@ -11,8 +11,9 @@ export default async function Layout({
     <div className="dark flex h-screen w-full items-center bg-background text-foreground">
       {/* left */}
       <div className="flex h-full flex-col items-center justify-center gap-8 bg-[#131313] md:w-32 lg:w-[576px]">
-        <h1>CPRG-306</h1>
-        <h2>Week-9</h2>
+        <h1 className="font-poppins text-2xl font-semibold text-green-700">
+          Week 9
+        </h1>
       </div>
       {/* right */}
       <div className="relative flex h-full flex-1 flex-col items-center justify-center border-l border-gray-900">
