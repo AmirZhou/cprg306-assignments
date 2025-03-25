@@ -15,7 +15,7 @@ export default async function Login(props: { searchParams: Promise<Message> }) {
         <p className="text-sm text-foreground">
           Don&apos;t have an account?{" "}
           <Link
-            className="font-medium text-foreground underline"
+            className="text-link font-medium text-foreground underline"
             href="/sign-up"
           >
             Sign up
@@ -27,7 +27,7 @@ export default async function Login(props: { searchParams: Promise<Message> }) {
           <div className="flex items-center justify-between">
             <Label htmlFor="password">Password</Label>
             <Link
-              className="text-xs text-foreground underline"
+              className="text-link text-xs underline"
               href="/forgot-password"
             >
               Forgot Password?
