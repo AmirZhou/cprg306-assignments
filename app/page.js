@@ -1,6 +1,6 @@
 import { WeekTimeline } from '../components/WeekTimeline';
 
-export default function Home() {
+export default async function Home() {
   return (
     <WeekTimeline />
   );
