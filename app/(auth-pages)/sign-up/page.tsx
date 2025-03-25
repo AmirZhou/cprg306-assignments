@@ -1,4 +1,8 @@
-import { signUpAction, signInAction, } from "@/app/(auth-pages)/actions";
+import {
+  signUpAction,
+  signInAction,
+  signInWithGitHubAction,
+} from "@/app/(auth-pages)/actions";
 import { FormMessage, Message } from "@/components/form-message";
 import { SubmitButton } from "@/components/submit-button";
 import { Label } from "@/components/ui/label";
@@ -26,7 +30,7 @@ export default async function SignUp(props: {
         <SubmitButton
           className="mt-4"
           pendingText="Signing In..."
-          formAction={signInAction}
+          formAction={signInWithGitHubAction}
         >
           <GithubIcon fill="#000000" />
           <span className="ml-1">Github</span>
