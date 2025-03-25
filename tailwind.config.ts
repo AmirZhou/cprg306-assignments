@@ -1,5 +1,6 @@
-/** @type {import('tailwindcss').Config} */
-export default {
+import type { Config } from 'tailwindcss';
+
+const config: Config = {
   content: [
     "./pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
@@ -45,8 +46,10 @@ export default {
       },
       fontFamily: {
         poppins: 'var(--font-poppins)',
-      }
+      },
     },
   },
   plugins: [],
 };
+
+export default config;
