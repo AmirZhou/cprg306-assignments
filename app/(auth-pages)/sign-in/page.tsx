@@ -10,14 +10,11 @@ export default async function Login(props: { searchParams: Promise<Message> }) {
 
   return (
     <>
-      <form className="flex min-w-64 flex-col">
+      <form className="flex w-96 flex-col">
         <h1 className="text-2xl font-medium">Sign in</h1>
         <p className="text-sm text-foreground">
           Don&apos;t have an account?{" "}
-          <Link
-            className="text-link font-medium text-foreground underline"
-            href="/sign-up"
-          >
+          <Link className="text-link font-medium underline" href="/sign-up">
             Sign up
           </Link>
         </p>

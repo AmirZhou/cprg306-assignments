@@ -15,7 +15,7 @@ export default async function Layout({
         <h2>Week-9</h2>
       </div>
       {/* right */}
-      <div className="relative flex h-full flex-1 flex-col items-center justify-center border-l border-gray-700">
+      <div className="relative flex h-full flex-1 flex-col items-center justify-center border-l border-gray-900">
         <Button
           asChild
           size="sm"
