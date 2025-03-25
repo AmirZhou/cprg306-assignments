@@ -65,12 +65,12 @@ export const signOutAction = async () => {
 
 export const signInWithGitHubAction = async (formData: FormData) => {
   const supabase = await createClient();
-  const origin = process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000";
+  const origin = process.env.NEXT_PUBLIC_APP_URL;
 
   const { data, error } = await supabase.auth.signInWithOAuth({
     provider: "github",
     options: {
-      redirectTo: `${origin}/auth/callback?redirect_to=/week-9`,
+      redirectTo: `${origin}/auth/callback`,
     },
   });
 
