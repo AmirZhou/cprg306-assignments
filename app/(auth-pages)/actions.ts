@@ -66,7 +66,8 @@ export const signOutAction = async () => {
 export const signInWithGitHubAction = async (formData: FormData) => {
   const supabase = await createClient();
   const origin = process.env.NEXT_PUBLIC_APP_URL;
-
+  console.log("the origin is:");
+  console.log(origin);
   const { data, error } = await supabase.auth.signInWithOAuth({
     provider: "github",
     options: {
@@ -76,7 +77,7 @@ export const signInWithGitHubAction = async (formData: FormData) => {
 
   if (error) {
     console.error("GitHub sign-in error:", error);
-    return encodedRedirect("error", "/sign-in", error.message);
+    return encodedRedirect("error", "/sign-up", error.message);
   }
 
   if (data.url) {
