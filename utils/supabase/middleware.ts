@@ -34,14 +34,17 @@ export const updateSession = async (request: NextRequest) => {
   // This will refresh session if expired - required for Server Components
   // https://supabase.com/docs/guides/auth/server-side/nextjs
   const user = await supabase.auth.getUser();
+  // https://supabase.com/docs/reference/javascript/auth-getuser
+  // this user's shape is crazy you need to check it out
+
+  console.log("Middleware: trying to adentify the user:");
+  console.log(user);
 
   if (request.nextUrl.pathname.startsWith("/week-9/secure") && user.error) {
+    console.log("redirecting to singin, from middleware. the request.url is:");
+    console.log(request.url);
     return NextResponse.redirect(new URL("/sign-in", request.url));
   }
-
-  if (request.nextUrl.pathname === "/" && !user.error) {
-    return NextResponse.redirect(new URL("/", request.url));
-  }
-
+  
   return response;
 };
