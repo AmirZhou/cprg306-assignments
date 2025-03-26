@@ -66,8 +66,6 @@ export const signOutAction = async () => {
 export const signInWithGitHubAction = async (formData: FormData) => {
   const supabase = await createClient();
   const origin = process.env.NEXT_PUBLIC_APP_URL;
-  console.log("the origin is:");
-  console.log(origin);
   const { data, error } = await supabase.auth.signInWithOAuth({
     provider: "github",
     options: {

@@ -18,7 +18,7 @@ export default async function Login(props: { searchParams: Promise<Message> }) {
       <p className="text-secondary-foreground">Connect to week9 with:</p>
 
       {/* GitHub Sign-In Form */}
-      <form className="w-full" action="/auth/git-sign-in" method="POST">
+      <form className="w-full" action="/auth/git-sign-in" method="GET">
         <SubmitButton
           className="mt-4 w-full"
           pendingText="Signing In..."
