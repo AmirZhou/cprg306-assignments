@@ -5,6 +5,9 @@ export default async function Page() {
   const supabase = await createClient();
   const { data: user } = await supabase.auth.getUser();
 
+  console.log("hitting secure page, and the user is:");
+  console.log(user);
+
   if (!user) {
     return redirect("/sign-in");
   }
