@@ -5,6 +5,8 @@ export async function GET(request: NextRequest) {
   const supabase = await createClient();
   const origin = process.env.NEXT_PUBLIC_APP_URL;
 
+  // cookieStore.delete("sb-ckwhxpplgakfccbrazeo-auth-token-code-verifier");
+
   const { data, error } = await supabase.auth.signInWithOAuth({
     provider: "github",
     options: {
@@ -18,7 +20,7 @@ export async function GET(request: NextRequest) {
       `${origin}/sign-up?error=${encodeURIComponent(error.message)}`,
     );
   }
-  console.log("Sign-in URL:", data.url);
+  console.log("Redirecting to:", data.url);
   const response = NextResponse.redirect(data.url);
   return response;
 }
