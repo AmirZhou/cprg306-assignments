@@ -81,6 +81,10 @@ export const signInWithGitHubAction = async (formData: FormData) => {
   }
 
   if (data.url) {
+    console.log(
+      "in the github signin action, before redirecting to data.url, the data.url is",
+    );
+    console.log(data.url);
     redirect(data.url);
   }
 };
